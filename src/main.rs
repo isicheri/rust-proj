@@ -1,3 +1,5 @@
+use std::fs;
+
 
 
 fn main() {
@@ -69,7 +71,7 @@ fn main() {
     let mut s1 = String::from("Hello");
 
     //having more than one mutable reference
-    let mut  s2 = &mut s1;
+    // let mut  s2 = &mut s1;
     // s2.push_str(" weirdo");
     // let s3 = &mut s2;
     // s3.push_str("okay!");
@@ -90,6 +92,119 @@ fn main() {
   //   // run_struct();
   // let updated =   update_word(&mut s1);
   // print!("updated string: {}",updated)
+// let user1 = User {
+//   username: String::from("dominion"),
+//   is_active: true,
+//   signin_count: 30
+// };
+// user1.username = String::from("Alice");
+
+// print!("username: {:?}", user1.username)
+// let rect = Rect {
+//   width: 32,
+//   height: 4
+// };
+// let area = rect.area();
+
+// print!(
+// "{:?}", area
+// )
+
+// let circle = Shapes::Circle(28.3);
+// let rectangle = Shapes::Rectacle(23.4, 6.0);
+// let square = Shapes::Square(5.5);
+
+// print_shape_value(rectangle);
+
+// let ans = calculate_area(circle);
+// print!("{}",ans)
+// enum Result<T,R> {
+//   Ok(T),
+//   Err(R)
+// }
+
+// let ans = read_file_content(String::from("example.txt"));
+
+
+
+}
+
+fn read_file_content(path: String) -> Result<String, String> {
+  let res = fs::read_to_string(path);
+
+  // lets try this error handling in another way
+  // let x = match res {
+  //     Ok(content) => Ok(content),
+  //     Err(err) => Err(err.to_string())
+  // };
+  if let Result::Ok(content) = res {
+    return Ok(content);
+  }else {
+       return Err("An Error occured".to_string());
+  }
+
+
+  // rust doesnt have a concet of a null type
+
+}
+
+//unit struct is a struct that does not have a datatype associated with it
+struct Car;
+
+enum Shapes {
+    Circle(f64),
+    Square(f64),
+    Rectacle(f64,f64)
+}
+
+fn calculate_area(shape:Shapes) -> f64{
+let ans = match shape {
+ Shapes::Circle(radius) => std::f64::consts::PI * radius*radius,
+ Shapes::Square(length) => length * length,
+ Shapes::Rectacle(height, width) => height * width
+};
+
+  return ans;
+}
+
+fn print_shape_value(shape:Shapes)  {
+
+  if let Shapes::Circle(radius) = shape {
+    print!("circle radius: {}",radius)
+  }else if let Shapes::Square(length) = shape {
+    print!("square length: {}",length);
+  }else if let Shapes::Rectacle(heigth, width) = shape {
+    print!(" lenght and width of the rectacngle{} {}", heigth,width);
+  }
+
+}
+
+enum Directions {
+  North,
+  South,
+  East,
+  West  
+}
+
+fn get_Direction(direction: Directions) -> Directions {
+  return direction;
+}
+
+struct User {
+  username: String,
+  is_active: bool,
+  signin_count: i64
+}
+
+struct Rect {
+  width: i32,
+  height: i32
+}
+
+impl Rect {
+    fn area(&self) -> i32 {
+    self.width * self.height
+    }
 }
 
 fn heap_fn() {
